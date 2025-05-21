@@ -1,0 +1,254 @@
+/* Tic Tac Toe UI Styles with Themes, Layout, Animations */
+:root {
+  --bg: #e0f2ff;
+  --fg: #222;
+  --cell-bg: rgba(255, 255, 255, 0.95);
+  --cell-border: #ccc;
+  --primary: #007bff;
+  --highlight: #6f42c1;
+  --line-color: #20c997;
+  --glass: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+}
+body.dark {
+  --bg: #121212;
+  --fg: #f1f1f1;
+  --cell-bg: rgba(40, 40, 40, 0.96);
+  --cell-border: #444;
+  --primary: #66b2ff;
+  --highlight: #bb86fc;
+  --line-color: #bb86fc;
+  --glass: rgba(32, 32, 32, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+#bugcats-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+.bugcat {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  opacity: 0.7;
+  animation: floatBugcat 15s linear infinite;
+}
+@keyframes floatBugcat {
+  0% {
+    transform: translateX(-100px) translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateX(100vw) translateY(-100px) rotate(360deg);
+  }
+}
+.container {
+  max-width: 480px;
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.title-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+h1 {
+  font-size: 2rem;
+  color: var(--primary);
+}
+.subheader {
+  font-size: 0.95rem;
+  font-weight: normal;
+  margin-top: 0.25rem;
+  color: var(--fg);
+  opacity: 0.7;
+}
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.select-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+}
+select, #muteToggle {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--cell-border);
+  background: var(--cell-bg);
+  color: var(--fg);
+  cursor: pointer;
+  min-width: 60px;
+  text-align: center;
+}
+#timerDisplay {
+  font-size: 1rem;
+  font-weight: bold;
+  background: var(--cell-bg);
+  border-radius: 0.5rem;
+  padding: 4px 8px;
+}
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.game-board-container {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.board {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+.cell {
+  background: var(--cell-bg);
+  border: 2px solid var(--cell-border);
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  user-select: none;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: background 0.2s;
+  position: relative;
+}
+.cell:hover::after {
+  content: attr(data-hint);
+  color: var(--highlight);
+  font-size: 1.5rem;
+  opacity: 0.4;
+  position: absolute;
+}
+.status {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: var(--highlight);
+}
+/* Win line */
+.win-line-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.win-line-svg line {
+  stroke: var(--line-color);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawLine 0.5s ease-out forwards;
+}
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  .subheader {
+    font-size: 0.8rem;
+  }
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+  .status, .scoreboard, #timerDisplay {
+    font-size: 0.95rem;
+  }
+  select, #muteToggle {
+    font-size: 0.9rem;
+    min-width: 55px;
+  }
+  .cell {
+    font-size: 2rem;
+  }
+}
+
+/* 🐱 Bugcat Falling Animation */
+@keyframes fallDown {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}

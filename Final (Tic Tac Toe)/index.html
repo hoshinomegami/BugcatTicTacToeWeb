@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 🔗 Favicon and Metadata -->
+  <link rel="icon" type="image/gif" href="nojima3.gif">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bugcat's Tic Tac Toe!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Floating bugcats -->
+  <div id="bugcats-container"></div>
+
+  <div class="container">
+    <header>
+      <div class="title-row">
+        <img src="nojima.gif" alt="logo-left" class="logo" />
+        <h1>Tic Tac Toe!</h1>
+        <img src="nojima2.gif" alt="logo-right" class="logo" />
+      </div>
+      <h2 class="subheader">An ET 570 Spring 2025 Term Project | Emma Aguilar</h2>
+    </header>
+
+    <div class="control-panel">
+      <div class="select-group">
+        <label for="gameMode">Modes:</label>
+        <select id="gameMode">
+          <option value="ai">Single Player</option>
+          <option value="2p">Two Players</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label for="playerSymbol">Player 1 As:</label>
+        <select id="playerSymbol">
+          <option value="X">✖️</option>
+          <option value="O">⭕</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label>Sound:</label>
+        <button id="muteToggle" data-muted="false">🔊</button>
+      </div>
+
+      <div class="select-group">
+        <label>Timer:</label>
+        <div id="timerDisplay">00:00</div>
+      </div>
+
+      <div class="select-group">
+        <label for="themeToggle">Theme:</label>
+        <select id="themeToggle">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="scoreboard">
+      <span>Player ✖️: <span id="playerScore">0</span></span>
+      <span>Player ⭕/AI: <span id="computerScore">0</span></span>
+    </div>
+
+    <div class="game-board-container">
+      <div class="board" id="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+        <svg id="winLine" class="win-line-svg" viewBox="0 0 300 300">
+          <line id="line" x1="0" y1="0" x2="0" y2="0" />
+        </svg>
+      </div>
+    </div>
+
+    <p class="status" id="status">Player ✖️'s turn</p>
+
+    <div class="button-group">
+      <button id="resetBtn">Restart Game</button>
+      <button id="resetScoreBtn">Reset Scores</button>
+    </div>
+  </div>
+
+  <!-- SFX -->
+  <audio id="moveSound" src="sfx/move.mp3" preload="auto"></audio>
+  <audio id="winSound" src="sfx/victory.mp3" preload="auto"></audio>
+  <audio id="defeatSound" src="sfx/lose.mp3" preload="auto"></audio>
+
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
